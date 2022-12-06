@@ -10,28 +10,30 @@ def enter_num():
     return num
 
 
-def find_num(fib, num):
+def new_fib(fib, num):
     for i in range(0, len(fib)-1):
-        if fib[i] == num:
-            print(f"Representation is {fib[i]}")
-            break
-        elif fib[i] > num:
+        if fib[i] > num:
             new_fib = fib[:i]
             new_fib.reverse()
-            print(new_fib)
-            for j in range(0, len(new_fib)-1):
-                value1 = num - fib[j]
-                j += 1
-
-            print(f"Closest is {fib[i-1]}")
+            skip = 2
+            del new_fib[skip - 1::skip]
+            greatest = new_fib[0]
+            return greatest
             break
 
 
-
+def find_representations(new_fib, num):
+    while num > 0:
+        values = new_fib(fib, num)
+        print(values, end=" ")
+        num -= values
 
 
 
 if __name__ == "__main__":
-    fib = create_fib(31)
+    fib = create_fib(1000)
+    print(fib)
     num = enter_num()
-    find_num(fib, num)
+    greatest = new_fib(fib, num)
+    find_representations(new_fib, num)
+
